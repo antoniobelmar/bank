@@ -29,6 +29,13 @@ describe('Account', function() {
     it('Transaction list starts as empty array', function() {
       expect(account._transactionList).toEqual([])
     })
+    it('Has a getter that returns the transaction list array', function() {
+      expect(account.getTransactionList()).toEqual(account._transactionList)
+    })
+    it('Has a setter that adds a transaction to the transaction list', function(){
+      account.addTransaction(transaction)
+      expect(account.getTransactionList()).toContain(transaction)
+    })
   })
 
   describe('Depositing money', function() {
@@ -40,6 +47,10 @@ describe('Account', function() {
       account.deposit(500,transaction)
       expect(transaction.addDebit).toHaveBeenCalledWith(500)
     })
+    it('Adds the transaction to the transaction list', function() {
+      account.deposit(500,transaction)
+      expect(account.getTransactionList()).toContain(transaction)
+    })
   })
 
   describe('Withdrawing money', function() {
@@ -50,6 +61,10 @@ describe('Account', function() {
     it('Calls the add credit method on the transaction object', function() {
       account.withdraw(500,transaction)
       expect(transaction.addCredit).toHaveBeenCalledWith(500)
+    })
+    it('Adds the transaction to the transaction list', function() {
+      account.withdraw(500,transaction)
+      expect(account.getTransactionList()).toContain(transaction)
     })
   })
 
