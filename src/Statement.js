@@ -11,7 +11,7 @@ Statement.prototype.print = function() {
   var balance = 0;
   this.getAccount().getTransactionList().forEach(function(transaction) {
     balance +=(-transaction.getCredit() + transaction.getDebit())
-    statement+= "\n" + (transaction.getDate() + " || " + transaction.getCredit() + " || " + transaction.getDebit()) + " || " + balance
+    statement+= "\n" + (transaction.getDate().toLocaleDateString() + " || " + transaction.getCredit() + " || " + transaction.getDebit()) + " || " + balance
   })
   return statement;
 }
