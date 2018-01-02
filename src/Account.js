@@ -14,3 +14,7 @@ Account.prototype.updateBalance = function(amount) {
 Account.prototype.deposit = function(amount) {
   this.updateBalance(amount)
 }
+
+Account.prototype.withdraw = function(amount) {
+  this.updateBalance(-amount)
+}

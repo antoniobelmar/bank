@@ -37,4 +37,11 @@ describe('Account', function() {
     })
   })
 
+  describe('Withdrawing money', function() {
+    it('Decreases balance by argument', function() {
+      account.withdraw(500)
+      expect(account.getBalance()).toEqual(-500)
+    })
+  })
+
 });
