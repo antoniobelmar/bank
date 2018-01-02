@@ -11,10 +11,12 @@ Account.prototype.updateBalance = function(amount) {
   this._balance += amount
 }
 
-Account.prototype.deposit = function(amount) {
+Account.prototype.deposit = function(amount, transaction = new Transaction()) {
+  transaction.addDebit(amount)
   this.updateBalance(amount)
 }
 
-Account.prototype.withdraw = function(amount) {
+Account.prototype.withdraw = function(amount, transaction = new Transaction()) {
+  transaction.addCredit(amount)
   this.updateBalance(-amount)
 }

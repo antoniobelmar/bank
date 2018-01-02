@@ -3,6 +3,7 @@ describe('Account', function() {
 
   beforeEach(function() {
     account = new Account;
+    transaction = jasmine.createSpyObj('transaction', ['addDebit', 'addCredit'])
   });
 
   describe('Is a constructor', function() {
@@ -35,12 +36,20 @@ describe('Account', function() {
       account.deposit(500)
       expect(account.getBalance()).toEqual(500)
     })
+    it('Calls the add debit method on the transaction object', function() {
+      account.deposit(500,transaction)
+      expect(transaction.addDebit).toHaveBeenCalledWith(500)
+    })
   })
 
   describe('Withdrawing money', function() {
     it('Decreases balance by argument', function() {
       account.withdraw(500)
       expect(account.getBalance()).toEqual(-500)
+    })
+    it('Calls the add credit method on the transaction object', function() {
+      account.withdraw(500,transaction)
+      expect(transaction.addCredit).toHaveBeenCalledWith(500)
     })
   })
 
