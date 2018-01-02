@@ -15,6 +15,9 @@ describe('Transaction', function() {
     it('Sets date property to the argument of constructor', function() {
       expect(transaction._date).toEqual("01-01-2018")
     })
+    it('Has a getter that returns the date property', function(){
+      expect(transaction.getDate()).toEqual(transaction._date)
+    })
   })
 
   describe('It has a debit property', function() {

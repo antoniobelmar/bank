@@ -4,6 +4,10 @@ function Transaction(date = new Date()) {
   this._credit = 0;
 };
 
+Transaction.prototype.getDate = function() {
+  return this._date;
+}
+
 Transaction.prototype.getDebit = function() {
   return this._debit;
 };
