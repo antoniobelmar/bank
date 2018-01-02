@@ -15,6 +15,15 @@ describe('Account', function() {
     it('Balance starts at 0', function() {
       expect(account._balance).toEqual(0)
     })
+    it('Has a getter that returns the balance', function(){
+      expect(account.getBalance()).toEqual(account._balance)
+    })
+  })
+
+  describe('It has a transaction list property', function() {
+    it('Transaction list starts as empty array', function() {
+      expect(account._transactionList).toEqual([])
+    })
   })
 
 });
