@@ -2,8 +2,9 @@ describe('Account', function() {
   var account;
 
   beforeEach(function() {
-    account = new Account;
+    transactionList = jasmine.createSpyObj('transactionList', ['addTransaction'])
     transaction = jasmine.createSpyObj('transaction', ['addDebit', 'addCredit'])
+    account = new Account(transactionList);
   });
 
   describe('Is a constructor', function() {
@@ -26,15 +27,11 @@ describe('Account', function() {
   })
 
   describe('It has a transaction list property', function() {
-    it('Transaction list starts as empty array', function() {
-      expect(account._transactionList).toEqual([])
+    it('Transaction list is an instance of TransactionList', function() {
+      expect(account._transactionList).toEqual(transactionList)
     })
     it('Has a getter that returns the transaction list array', function() {
       expect(account.getTransactionList()).toEqual(account._transactionList)
-    })
-    it('Has a setter that adds a transaction to the transaction list', function(){
-      account.addTransaction(transaction)
-      expect(account.getTransactionList()).toContain(transaction)
     })
   })
 
@@ -47,9 +44,9 @@ describe('Account', function() {
       account.deposit(500,transaction)
       expect(transaction.addDebit).toHaveBeenCalledWith(500)
     })
-    it('Adds the transaction to the transaction list', function() {
+    it('Calls addTransaction on the transactionList property', function() {
       account.deposit(500,transaction)
-      expect(account.getTransactionList()).toContain(transaction)
+      expect(transactionList.addTransaction).toHaveBeenCalledWith(transaction)
     })
   })
 
@@ -64,7 +61,7 @@ describe('Account', function() {
     })
     it('Adds the transaction to the transaction list', function() {
       account.withdraw(500,transaction)
-      expect(account.getTransactionList()).toContain(transaction)
+      expect(transactionList.addTransaction).toHaveBeenCalledWith(transaction)
     })
   })
 

@@ -1,6 +1,6 @@
-function Account(){
+function Account(transactionList = new TransactionList()){
   this._balance = 0;
-  this._transactionList = [];
+  this._transactionList = transactionList;
 };
 
 Account.prototype.getBalance = function() {
@@ -15,18 +15,14 @@ Account.prototype.getTransactionList = function() {
   return this._transactionList
 }
 
-Account.prototype.addTransaction = function(transaction) {
-  this._transactionList.push(transaction)
-}
-
 Account.prototype.deposit = function(amount, transaction = new Transaction()) {
   transaction.addDebit(amount)
   this.updateBalance(amount)
-  this.addTransaction(transaction)
+  this._transactionList.addTransaction(transaction)
 }
 
 Account.prototype.withdraw = function(amount, transaction = new Transaction()) {
   transaction.addCredit(amount)
   this.updateBalance(-amount)
-  this.addTransaction(transaction)
+  this._transactionList.addTransaction(transaction)
 }
