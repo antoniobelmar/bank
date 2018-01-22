@@ -3,6 +3,7 @@ describe("Statement", function() {
 
   beforeEach(function(){
     account = jasmine.createSpyObj("account",["getTransactionList"])
+    transactionList = jasmine.createSpyObj("transactionList",["getTransactions"])
     transaction = jasmine.createSpyObj("transaction", ["getDate", "getCredit", "getDebit"])
     transaction2 = jasmine.createSpyObj("transaction2", ["getDate", "getCredit", "getDebit"])
     date = jasmine.createSpyObj("date", ["toLocaleDateString"])
@@ -24,18 +25,21 @@ describe("Statement", function() {
 
   describe("Print statement", function() {
     it('Prints the statement headers to the console', function(){
-      account.getTransactionList.and.returnValue([transaction])
+      account.getTransactionList.and.returnValue(transactionList)
+      transactionList.getTransactions.and.returnValue([transaction])
       expect(statement.print()).toContain("Date || Credit || Debit || Balance")
     })
     it('Prints the correct statement for one transaction', function() {
-      account.getTransactionList.and.returnValue([transaction])
+      account.getTransactionList.and.returnValue(transactionList)
+      transactionList.getTransactions.and.returnValue([transaction])
       date.toLocaleDateString.and.returnValue("01-01-2018")
       transaction.getCredit.and.returnValue(5)
       transaction.getDebit.and.returnValue(0)
       expect(statement.print()).toContain("01-01-2018 || 5 || 0 || -5")
     })
     it('Prints the correct statement for mutiple transactions', function() {
-      account.getTransactionList.and.returnValue([transaction, transaction2])
+      account.getTransactionList.and.returnValue(transactionList)
+      transactionList.getTransactions.and.returnValue([transaction, transaction2])
       date.toLocaleDateString.and.returnValue("01-01-2018")
       transaction.getCredit.and.returnValue(5)
       transaction.getDebit.and.returnValue(0)
