@@ -73,6 +73,7 @@ statement = new Statement(account);
 > Statement {_account: Account}
 statement.print();
 ```
+Which returns:
 ```
 > "Date || Credit || Debit || Balance
 22/01/2018 || 0 || 50 || 50
@@ -84,6 +85,7 @@ account.withdraw(5);
 > undefined
 statement.print();
 ```
+Which returns:
 ```
 > "Date || Credit || Debit || Balance
 22/01/2018 || 0 || 50 || 50
