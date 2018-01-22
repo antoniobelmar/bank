@@ -72,15 +72,19 @@ We can now print a statement:
 statement = new Statement(account);
 > Statement {_account: Account}
 statement.print();
+```
+```
 > "Date || Credit || Debit || Balance
 22/01/2018 || 0 || 50 || 50
 22/01/2018 || 20 || 0 || 30"
 ```
 If we add one transaction and re-print, the transaction is now recorded:
-```
+```javascript
 account.withdraw(5);
 > undefined
 statement.print();
+```
+```
 > "Date || Credit || Debit || Balance
 22/01/2018 || 0 || 50 || 50
 22/01/2018 || 20 || 0 || 30
