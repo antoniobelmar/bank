@@ -81,10 +81,10 @@ If we add one transaction and re-print, the transaction is now recorded:
 account.withdraw(5);
 > undefined
 statement.print();
-> "Date || Credit || Debit || Balance
+> Date || Credit || Debit || Balance
 22/01/2018 || 0 || 50 || 50
 22/01/2018 || 20 || 0 || 30
-22/01/2018 || 5 || 0 || 25"
+22/01/2018 || 5 || 0 || 25
 ```
 
 Errors are not thrown when trying to withdraw more money than the current balance as this is expected to be handled from a potential user view.
