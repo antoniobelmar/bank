@@ -20,9 +20,6 @@ describe("Statement", function() {
     it('Sets account property to the argument of constructor', function(){
       expect(statement._account).toEqual(account)
     })
-    it('Has a getter that returns the account property', function() {
-      expect(statement.getAccount()).toEqual(statement._account)
-    })
   })
 
   describe("Print statement", function() {
